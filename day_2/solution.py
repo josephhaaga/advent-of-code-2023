@@ -51,6 +51,24 @@ def game_is_possible(record: str, constraint: str) -> bool:
     return True
 
 
+def power_of_min_cubes(record: str, constraint: str) -> int:
+    observations: List[Dict[str, int]] = parse_game_record(record)
+    cons = summarize_color_observations(parse_constraint(constraint))
+    game_total = {}
+
+    for obs in observations:
+        for (color, count) in obs.items():
+            if color not in game_total:
+                game_total[color] = count
+            elif count > game_total[color]:
+                game_total[color] = count
+
+    i = 1
+    for (color, count) in game_total.items():
+        i *= count
+    return i
+
+
 def main() -> int:
     with open("input.txt", "r") as f:
         lines = f.read().split("\n")[:-1]
@@ -65,13 +83,10 @@ def main() -> int:
             part_1 += game_number
     print(f"{part_1=}")
 
-    """
     part_2 = 0
     for line in lines:
-        l = replace_words_with_digits(line)
-        part_2 += get_calibration_value(l)
+        part_2 += power_of_min_cubes(line, constraint)
     print(f"{part_2=}")
-    """
 
     return 0
 
