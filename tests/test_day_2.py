@@ -1,8 +1,9 @@
 import pytest
 
+from day_2.solution import game_is_possible
 from day_2.solution import parse_constraint
 from day_2.solution import parse_game_record
-from day_2.solution import game_is_possible
+from day_2.solution import power_of_min_cubes
 
 
 PART_1_INPUT = """
@@ -23,15 +24,13 @@ PART_1_POSSIBLE_GAMES = [
     True
 ]
 
-PART_1_ANSWERS = []
-
 
 def test_parse_game_record():
     rec = "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green"
     out = parse_game_record(rec)
     assert out == [
-        (6, "red"), (1, "blue"), (3, "green"),
-        (2, "blue"), (1, "red"), (2, "green")
+        {"red": 6, "blue": 1, "green": 3},
+        {"red": 1, "blue": 2, "green": 2},
     ]
 
 
@@ -45,3 +44,24 @@ def test_parse_game_record():
 )
 def test_game_is_possible(record, constraint, output):
     assert game_is_possible(record, constraint) == output
+
+
+PART_2_POWER_OF_SET_OF_CUBES = [
+    48,
+    12,
+    1560,
+    630,
+    36
+]
+
+
+@pytest.mark.parametrize(
+    'record, constraint, output',
+    zip(
+        PART_1_INPUT.split("\n")[1:],
+        [PART_1_CONSTRAINT] * len(PART_1_POSSIBLE_GAMES),
+        PART_2_POWER_OF_SET_OF_CUBES
+    )
+)
+def test_power_of_cubes(record, constraint, output):
+    assert power_of_min_cubes(record, constraint) == output
