@@ -1,4 +1,7 @@
 from day_3.solution import part_1
+from day_3.solution import Board, Number
+
+import pytest
 
 
 PART_1_INPUT = """
@@ -15,6 +18,14 @@ PART_1_INPUT = """
 """
 
 PART_1_ANSWER = 4361
+
+
+@pytest.mark.skip
+def test_board_parse_numbers():
+    inp = ["467..114.."]
+    b = Board(inp)
+    out = b.numbers
+    assert out == [[467, 467, 467, None, None, 114, 114, 114, None, None]]
 
 
 def test_part_1():
