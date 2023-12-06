@@ -70,7 +70,7 @@ def power_of_min_cubes(record: str, constraint: str) -> int:
 
 
 def main() -> int:
-    with open("input.txt", "r") as f:
+    with open("day_2/input.txt", "r") as f:
         lines = f.read().split("\n")[:-1]
     constraint = "12 red cubes, 13 green cubes, 14 blue cubes"
     number_pattern = re.compile(r'Game (\d+):')

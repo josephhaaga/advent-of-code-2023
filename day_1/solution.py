@@ -45,7 +45,7 @@ def replace_words_with_digits(line: str) -> str:
 
 
 def main() -> int:
-    with open("input.txt", "r") as f:
+    with open("day_1/input.txt", "r") as f:
         lines = f.read().split("\n")[:-1]
 
     part_1 = 0

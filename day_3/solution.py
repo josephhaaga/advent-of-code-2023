@@ -76,7 +76,7 @@ def part_1(lines: List[str]) -> int:
 
 
 def main() -> int:
-    with open("input.txt", "r") as f:
+    with open("day_3/input.txt", "r") as f:
         lines = f.read().split("\n")[:-1]
 
     print(part_1(lines))
