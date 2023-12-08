@@ -26,7 +26,7 @@ def test_part_1():
 
 
 def test_border_indexes():
-    assert border_indexes(row=1, start=1, end=2, width=10, height=10) == [
+    assert border_indexes(row=1, start=1, end=3, width=10, height=10) == [
         (0, 0),
         (0, 1),
         (0, 2),
