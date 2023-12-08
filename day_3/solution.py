@@ -1,3 +1,4 @@
+import math
 import re
 from typing import Iterator
 from typing import List
@@ -6,7 +7,6 @@ from typing import Tuple
 
 def border_indexes(row, start, end, width, height) -> List[Tuple[int, int]]:
     res = []
-
     min_row, max_row = max(0, row - 1), min(row + 1, height - 1)
     min_col, max_col = max(0, start - 1), min(end, width - 1)
     prohibited = [(row, c) for c in range(start, end)]
@@ -19,7 +19,7 @@ def border_indexes(row, start, end, width, height) -> List[Tuple[int, int]]:
     return res
 
 
-def is_part_number(lines: list[str], row: int, col: tuple[int, int]) -> bool:
+def is_part_number(lines: List[str], row: int, col: Tuple[int, int]) -> bool:
     """determine if the number at lines[row][col[0]:col[1]] is a part number."""
     w, h = len(lines[0]), len(lines)
     s, e = col
@@ -47,8 +47,42 @@ def part_1(lines: List[str]) -> int:
     return s
 
 
-def part_2(lines: List[str]) -> int:
+    for (r, c) in border_indexes(row, s, e, w, h):
+        ...
+
     return 0
+
+
+
+
+def part_2(lines: List[str]) -> int:
+    # Find gears (asterisks with 2 adjacent numbers)
+        # Calculate gear ratio (multiply those numbers)
+    # sum up gear ratios
+    ratioes = []
+    result, height, width = 0, len(lines), len(lines[0])
+    gear_pattern, number_pattern = re.compile(r"\*"), re.compile(r"(\d+)")
+    top, mid, bottom = range(-1, height-1), range(0, height), range(1, height+1)
+    for i, j, k in zip(top, mid, bottom):
+        this_line = lines[j]
+        gears_on_this_line = gear_pattern.finditer(this_line)
+        numbers = [match for match in number_pattern.finditer(this_line)]
+        if i >= 0:
+            numbers += [match for match in number_pattern.finditer(lines[i])]
+        if k < height:
+            numbers += [match for match in number_pattern.finditer(lines[k])]
+        for gear in gears_on_this_line:
+            gear_col = gear.span()[0]
+            l, r = max(0, gear_col - 1), min(width, gear_col + 1)
+            adjacent_numbers = [
+                int(n.group(0)) for n in numbers
+                if l <= n.span()[0] <= r
+                or l <= n.span()[1] <= r
+            ]
+            print(adjacent_numbers)
+            if len(adjacent_numbers) == 2:
+                ratioes += [math.prod(adjacent_numbers)]
+    return result
 
 
 def main() -> int:
