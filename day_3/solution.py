@@ -60,7 +60,7 @@ def part_2(lines: List[str]) -> int:
         # Calculate gear ratio (multiply those numbers)
     # sum up gear ratios
     ratioes = []
-    result, height, width = 0, len(lines), len(lines[0])
+    height, width = len(lines), len(lines[0])
     gear_pattern, number_pattern = re.compile(r"\*"), re.compile(r"(\d+)")
     top, mid, bottom = range(-1, height-1), range(0, height), range(1, height+1)
     for i, j, k in zip(top, mid, bottom):
@@ -71,18 +71,20 @@ def part_2(lines: List[str]) -> int:
             numbers += [match for match in number_pattern.finditer(lines[i])]
         if k < height:
             numbers += [match for match in number_pattern.finditer(lines[k])]
+
         for gear in gears_on_this_line:
             gear_col = gear.span()[0]
             l, r = max(0, gear_col - 1), min(width, gear_col + 1)
             adjacent_numbers = [
                 int(n.group(0)) for n in numbers
                 if l <= n.span()[0] <= r
-                or l <= n.span()[1] <= r
+                or l <= (n.span()[1] - 1) <= r
             ]
-            print(adjacent_numbers)
+
             if len(adjacent_numbers) == 2:
                 ratioes += [math.prod(adjacent_numbers)]
-    return result
+
+    return sum(ratioes)
 
 
 def main() -> int:
