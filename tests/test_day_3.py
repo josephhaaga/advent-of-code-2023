@@ -1,4 +1,5 @@
 from day_3.solution import part_1
+from day_3.solution import part_2
 from day_3.solution import border_indexes
 
 import pytest
@@ -38,3 +39,12 @@ def test_border_indexes():
         (2, 2),
         (2, 3),
     ]
+
+
+PART_2_ANSWER = 467835
+
+
+def test_part_2():
+    lines = PART_1_INPUT.split("\n")[1:]
+    assert part_2(lines) == PART_2_ANSWER
+

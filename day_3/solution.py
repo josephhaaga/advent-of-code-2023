@@ -47,6 +47,10 @@ def part_1(lines: List[str]) -> int:
     return s
 
 
+def part_2(lines: List[str]) -> int:
+    return 0
+
+
 def main() -> int:
     with open("day_3/input.txt", "r") as f:
         lines = f.read().split("\n")[:-1]
