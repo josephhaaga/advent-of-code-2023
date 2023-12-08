@@ -91,7 +91,8 @@ def main() -> int:
     with open("day_3/input.txt", "r") as f:
         lines = f.read().split("\n")[:-1]
 
-    print(part_1(lines))
+    print(f"{part_1(lines)=}")
+    print(f"{part_2(lines)=}")
 
     return 0
 
