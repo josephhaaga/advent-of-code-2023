@@ -2,7 +2,6 @@ import re
 from typing import Tuple
 
 
-
 def get_calibration_value(line: str) -> int:
     """Extract first and last digits in `line` to form a two-digit number"""
     left, right = None, None
@@ -10,7 +9,7 @@ def get_calibration_value(line: str) -> int:
         if line[i].isnumeric():
             left = line[i]
             break
-    for i in range(len(line)-1, -1, -1):
+    for i in range(len(line) - 1, -1, -1):
         if line[i].isnumeric():
             right = line[i]
             break
@@ -35,7 +34,7 @@ def replace_words_with_digits(line: str) -> str:
     words = list(WORD_TO_DIGIT.keys())
     i = 0
     while i < len(line) - 2:
-        for j in range(i+3, i+6):
+        for j in range(i + 3, i + 6):
             subword = line[i:j]
             if subword in words:
                 match = WORD_TO_DIGIT[subword]

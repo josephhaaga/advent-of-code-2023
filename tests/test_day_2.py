@@ -16,13 +16,7 @@ Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green
 
 PART_1_CONSTRAINT = "12 red cubes, 13 green cubes, 14 blue cubes"
 
-PART_1_POSSIBLE_GAMES = [
-    True,
-    True,
-    False,
-    False,
-    True
-]
+PART_1_POSSIBLE_GAMES = [True, True, False, False, True]
 
 
 def test_parse_game_record():
@@ -35,33 +29,27 @@ def test_parse_game_record():
 
 
 @pytest.mark.parametrize(
-    'record, constraint, output',
+    "record, constraint, output",
     zip(
         PART_1_INPUT.split("\n")[1:],
         [PART_1_CONSTRAINT] * len(PART_1_POSSIBLE_GAMES),
-        PART_1_POSSIBLE_GAMES
-    )
+        PART_1_POSSIBLE_GAMES,
+    ),
 )
 def test_game_is_possible(record, constraint, output):
     assert game_is_possible(record, constraint) == output
 
 
-PART_2_POWER_OF_SET_OF_CUBES = [
-    48,
-    12,
-    1560,
-    630,
-    36
-]
+PART_2_POWER_OF_SET_OF_CUBES = [48, 12, 1560, 630, 36]
 
 
 @pytest.mark.parametrize(
-    'record, constraint, output',
+    "record, constraint, output",
     zip(
         PART_1_INPUT.split("\n")[1:],
         [PART_1_CONSTRAINT] * len(PART_1_POSSIBLE_GAMES),
-        PART_2_POWER_OF_SET_OF_CUBES
-    )
+        PART_2_POWER_OF_SET_OF_CUBES,
+    ),
 )
 def test_power_of_cubes(record, constraint, output):
     assert power_of_min_cubes(record, constraint) == output

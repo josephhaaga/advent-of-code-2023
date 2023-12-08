@@ -4,21 +4,18 @@ from typing import List
 from typing import Tuple
 
 
-
 def parse_game_record(record: str) -> List[Dict[str, int]]:
     """Extract observations from a single game record."""
-    pat = re.compile(r'((\d+) (\w+))')
-    r = record[record.index(":") + 1:]
+    pat = re.compile(r"((\d+) (\w+))")
+    r = record[record.index(":") + 1 :]
     results = []
     for obs in r.split(";"):
-        results += [{
-            match[2]: int(match[1])
-            for match in pat.findall(obs)
-        }]
+        results += [{match[2]: int(match[1]) for match in pat.findall(obs)}]
     return results
 
+
 def parse_constraint(constraint: str) -> List[Tuple[int, str]]:
-    constraint_pattern = re.compile(r'((\d+) ([a-z]+) cubes)')
+    constraint_pattern = re.compile(r"((\d+) ([a-z]+) cubes)")
     constraints: List[Tuple[int, str]] = [
         (int(m[1]), m[2]) for m in constraint_pattern.findall(constraint)
     ]
@@ -38,9 +35,7 @@ def summarize_color_observations(record: List[Tuple[int, str]]) -> Dict[str, int
 def game_is_possible(record: str, constraint: str) -> bool:
     """Return whether the game record is possible given the constraint."""
     observations = parse_game_record(record)
-    cons = summarize_color_observations(
-        parse_constraint(constraint)
-    )
+    cons = summarize_color_observations(parse_constraint(constraint))
 
     for obs in observations:
         for (color, count) in obs.items():
@@ -73,7 +68,7 @@ def main() -> int:
     with open("day_2/input.txt", "r") as f:
         lines = f.read().split("\n")[:-1]
     constraint = "12 red cubes, 13 green cubes, 14 blue cubes"
-    number_pattern = re.compile(r'Game (\d+):')
+    number_pattern = re.compile(r"Game (\d+):")
 
     part_1 = 0
     for line in lines:
